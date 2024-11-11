@@ -1,0 +1,37 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Droidlike"
+run/main_scene="res://Field/main.tscn"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/show_image=false
+boot_splash/image="res://Assets/__everything/FAT ANIMAL TEDDY/Animation PNG/TEDDY/NUDE/01-Idle/01-Idle/FA_TEDDY_Idle_003.png"
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=545
+window/size/viewport_height=660
+
+[layer_names]
+
+2d_physics/layer_1="Bushes"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Bullets"
+2d_physics/layer_5="Items"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

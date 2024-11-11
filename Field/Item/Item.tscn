@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://exp8uwe5b2tf"]
+
+[ext_resource type="Script" path="res://Field/Item/ItemSprites.gd" id="1_6k2hv"]
+[ext_resource type="Texture2D" uid="uid://rd2r5ef7l71j" path="res://Field/Item/_Turkey.tres" id="2_6k2hv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6k2hv"]
+radius = 31.0
+
+[node name="Item" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_6k2hv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6k2hv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+texture = ExtResource("2_6k2hv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

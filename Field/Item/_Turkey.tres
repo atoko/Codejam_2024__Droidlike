@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://rd2r5ef7l71j"]
+
+[ext_resource type="Texture2D" uid="uid://bbsi0kpgpd3ur" path="res://Assets/__everything/Turkeys/turkey-sprite-sheet.png" id="1_rukn4"]
+
+[resource]
+atlas = ExtResource("1_rukn4")
+region = Rect2(137, 320, 64, 64)

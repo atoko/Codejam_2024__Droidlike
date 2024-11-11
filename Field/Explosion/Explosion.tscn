@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://dancu3boskndo"]
+
+[ext_resource type="Texture2D" uid="uid://bt2cotcjtrsrt" path="res://Assets/__everything/painterly-spell-icons-2/beam-royal-1.png" id="1_mkchm"]
+[ext_resource type="Script" path="res://Field/Explosion/Explosion.gd" id="2_wpliu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wpliu"]
+blend_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8114l"]
+atlas = ExtResource("1_mkchm")
+region = Rect2(137, 96, 32, 32)
+margin = Rect2(0.94, 0, 0, 0)
+
+[sub_resource type="Curve" id="Curve_f6tgq"]
+min_value = -9.66
+max_value = 12.1
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0573171, 0.460776), 37.4878, 37.4878, 0, 0, Vector2(0.191463, 0.493598), 29.4775, 29.4775, 0, 0, Vector2(0.579268, 0.594535), -84.3679, -84.3679, 0, 0, Vector2(0.701219, 0), -372.366, -372.366, 0, 0, Vector2(0.779268, 0.876628), -899.39, -899.39, 0, 0, Vector2(0.842683, 5.05989), -30.2124, -30.2124, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 8
+
+[sub_resource type="Gradient" id="Gradient_gbp8q"]
+offsets = PackedFloat32Array(0.0746667, 0.312, 0.477333, 0.690667, 0.88)
+colors = PackedColorArray(1, 1, 1, 0, 0.48, 0.48, 0.48, 1, 0.85, 0.85, 0.85, 0.780392, 1, 0, 0, 1, 1, 1, 1, 0)
+
+[node name="Explosion" type="CPUParticles2D"]
+texture_filter = 2
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_wpliu")
+use_parent_material = true
+position = Vector2(1, 0)
+scale = Vector2(0.3, 0.3)
+emitting = false
+amount = 92
+lifetime = 0.93
+one_shot = true
+speed_scale = 1.09
+explosiveness = 0.95
+randomness = 0.09
+lifetime_randomness = 0.2
+texture = SubResource("AtlasTexture_8114l")
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 295.21
+initial_velocity_max = 492.97
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_f6tgq")
+color = Color(1, 0.946667, 0.8, 0.215686)
+color_ramp = SubResource("Gradient_gbp8q")
+hue_variation_max = 1.0
+script = ExtResource("2_wpliu")

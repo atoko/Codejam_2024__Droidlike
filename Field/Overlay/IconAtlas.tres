@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://q3nxjrk27mux"]
+
+[ext_resource type="Texture2D" uid="uid://3ss2io2ggarm" path="res://Assets/__everything/Bit-Bonanza-10x10/Misc.png" id="1_2ul8t"]
+
+[resource]
+atlas = ExtResource("1_2ul8t")
+region = Rect2(20, 100, 10, 10)

@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://dfm1o1n7rmix5"]
+
+[ext_resource type="Script" path="res://Field/Projectile/Bullet.gd" id="1_ft26q"]
+[ext_resource type="Shader" path="res://Field/Player/Bullet.gdshader" id="1_js047"]
+[ext_resource type="Texture2D" uid="uid://b1mgcg4gciqio" path="res://Assets/__everything/painterly-spell-icons-4/air-burst-jade-1.png" id="2_ft26q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nllvn"]
+shader = ExtResource("1_js047")
+
+[sub_resource type="Animation" id="Animation_vwfqb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_tv5nm"]
+resource_name = "Spin"
+length = 0.516
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.366667, 0.633333, 0.833333),
+"transitions": PackedFloat32Array(4.92457, 0.615572, 0.353551, 1, 3.97337),
+"update": 0,
+"values": [-6.28319, -3.14159, -0.00174533, 3.14159, -0.703368]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g4pcb"]
+_data = {
+&"RESET": SubResource("Animation_vwfqb"),
+&"Spin": SubResource("Animation_tv5nm")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qyqiw"]
+size = Vector2(9, 10)
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_ft26q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_nllvn")
+scale = Vector2(0.195312, 0.195312)
+texture = ExtResource("2_ft26q")
+region_enabled = true
+region_rect = Rect2(72, 128, 48, 48)
+region_filter_clip_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_g4pcb")
+}
+speed_scale = 1.78
+movie_quit_on_finish = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_qyqiw")
+
+[node name="Despawn" type="Timer" parent="."]
+wait_time = 36.59
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Despawn" to="." method="_on_despawn_timeout"]

@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://woh1tnk7emqy"]
+
+[ext_resource type="Texture2D" uid="uid://6ttaj5j3ao31" path="res://Assets/__everything/rpgcritters2.png" id="1_3o4wt"]
+[ext_resource type="Script" path="res://Field/Enemy/enemy.gd" id="1_epr5s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epr5s"]
+atlas = ExtResource("1_3o4wt")
+region = Rect2(4, 100, 46, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vonkd"]
+atlas = ExtResource("1_3o4wt")
+region = Rect2(4, 146, 46, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vso2s"]
+atlas = ExtResource("1_3o4wt")
+region = Rect2(50, 146, 46, 46)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xjnqo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epr5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vonkd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vso2s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkela"]
+size = Vector2(15, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epr5s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_epr5s"]
+radius = 14.0357
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_epr5s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-5, 0)
+sprite_frames = SubResource("SpriteFrames_xjnqo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fkela")
+
+[node name="EntranceTimer" type="Timer" parent="."]
+wait_time = 0.632
+autostart = true
+
+[node name="Threat" type="Area2D" parent="."]
+position = Vector2(-5, 0)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Threat"]
+shape = SubResource("RectangleShape2D_epr5s")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 68
+collision_mask = 72
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_epr5s")
+debug_color = Color(0.609468, 0.42041, 0.868595, 0.42)
+
+[node name="Despawn" type="Timer" parent="."]
+wait_time = 5.479
+
+[connection signal="timeout" from="EntranceTimer" to="." method="_on_entrance_timer_timeout"]
+[connection signal="body_entered" from="Threat" to="." method="_on_threat_body_entered"]
+[connection signal="timeout" from="Despawn" to="." method="_on_despawn_timeout"]

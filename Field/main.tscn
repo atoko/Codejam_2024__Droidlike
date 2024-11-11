@@ -1,0 +1,32 @@
+[gd_scene load_steps=9 format=3 uid="uid://b1cmpatek2rwf"]
+
+[ext_resource type="Script" path="res://Field/main.gd" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bs4t360x3svqh" path="res://Field/Stage/World.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://rjg4ln8kjxtg" path="res://Field/Player/Player.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dkbmyf753xoho" path="res://Field/Enemy/EnemySpawner.tscn" id="3_h2yge"]
+[ext_resource type="Script" path="res://Field/Projectile/Bullets.gd" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dfm1o1n7rmix5" path="res://Field/Player/Bullet.tscn" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://belco33brwxhn" path="res://Field/Overlay/Overlay.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://bcjti3rel0cbi" path="res://Field/Result/Gameover.tscn" id="8_ej7ys"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_1bvp3")
+
+[node name="World" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(-3, -2)
+
+[node name="Player" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(265, 214)
+
+[node name="Bullets" type="Node2D" parent="."]
+script = ExtResource("4_lquwl")
+bullet_scene = ExtResource("5_7mycd")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_h2yge")]
+
+[node name="Overlay" parent="." instance=ExtResource("7_272bh")]
+
+[node name="Gameover" parent="." instance=ExtResource("8_ej7ys")]
+
+[connection signal="shoot" from="Player" to="Bullets" method="_on_player_shoot"]
+[connection signal="hit_p" from="EnemySpawner" to="." method="_on_enemy_spawner_hit_p"]
